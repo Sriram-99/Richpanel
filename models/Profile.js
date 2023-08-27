@@ -8,7 +8,7 @@ const ProfileSchema=new mongoose.Schema({
     },
     Active:{
         type:Boolean,
-        default:false
+       
     },
     monthlyType:{
         // mothly or yearly

@@ -10,9 +10,9 @@ const Landing = ({isAuthenticated}) => {
     <>
     <div className="dark-overlay">
       <div className="landing-inner">
-        <h1 className="x-large">Payment Spot</h1>
+        <h1 className="x-large">SubsFlow</h1>
         <p className="lead">
-         this website is created for demonstration of payments
+        "Unlocking Simplicity: Seamlessly connecting users to subscriptions and payments."
         </p>
         <div className="buttons">
           <NavLink to="/register" className="btn btn-primary">Sign Up</NavLink>

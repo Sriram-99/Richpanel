@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import proxy from '../../actions/proxy';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 const Paymentsuccess = () => {
     useEffect(()=>{
         axios.get(`${proxy}/api/stripe/success`)
@@ -11,8 +12,16 @@ const Paymentsuccess = () => {
             console.error('Error fetching data:', error);
           });
        },[]);
+       const navigate=useNavigate();
+    return (<>
 
-    return (<h2>Payment success</h2>  );
+        
+       <h2>Payment success</h2>
+       <p>redirecting ..........</p>
+       {setTimeout(()=>{
+          navigate('/dashboard');
+       },2000)}
+       </>  );
   
 }
 

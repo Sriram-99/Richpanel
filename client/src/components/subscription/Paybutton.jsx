@@ -23,7 +23,7 @@ const Paybutton=({items})=>{
     }
     return (
         <>
-            <button style={{backgroundColor:"blue",padding:"7px" ,color:"white"}} onClick={()=>handlecheckout()}>Next</button>
+            <button className='next-button' onClick={()=>handlecheckout()}>Next</button>
         </>
     );
 }

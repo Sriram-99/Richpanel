@@ -15,6 +15,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivaterRoute from './components/routing/PrivaterRoute';
 import Subscription from './components/subscription/Subscription';
 import Paymentsuccess from './components/subscription/Paymentsuccess';
+import Temp from './components/Temp';
 if(localStorage.token){
   setAuthToken(localStorage.token)
 }
@@ -46,11 +47,12 @@ function AppContent() {
         <Alert />
         <Routes>
           <Route exact path='/' element={<Landing />} />
+          <Route exact path='/temp' element={<Temp />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
           {/* <Route exact path="/subscribe" element={<Subscription />} /> */}
           <Route exact path="/dashboard" element={<PrivaterRoute component={Dashboard}/>} />
-          <Route exact path="/payment-success" element={<PrivaterRoute component={Paymentsuccess}/>} />
+          <Route exact path="/checkout-success" element={<PrivaterRoute component={Paymentsuccess}/>} />
           <Route exact path="/subscribe" element={<PrivaterRoute component={Subscription}/>} />
         </Routes>
       </div>

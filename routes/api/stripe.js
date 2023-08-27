@@ -5,20 +5,32 @@ const Stripe = require('stripe');
 const Plan = require('../../models/Plan');
 const Profile = require('../../models/Profile');
 const { compareSync } = require('bcryptjs');
-const stripe = Stripe
+const formatDate =require('../utils/formatedate');
 const config=require('config');
 const STRIPE_KEY=config.get('STRIPE_KEY');
 const CLIENT_URL=config.get('CLIENT_URL');
-(STRIPE_KEY);
+const stripe = Stripe(STRIPE_KEY);
+// const getPrice=require("../utils/utils");
+
+
+
    const data={
        user:"123456789123",
        Active:true,
        monthlyType:"monthly",
-       PlanType:1,
-       price:0,
+       planType:null,
+       price:500,
        startDate:Date.now(),
    } 
-
+   
+const getprice=(plans,a,b)=>{
+  const maindata=a==0?plans[0]:plans[1];
+  if(b==1) return maindata.planType.Mobile.monthlyPrice;
+  if(b==2) return maindata.planType.Basic.monthlyPrice;
+  if(b==3) return maindata.planType.Standard.monthlyPrice;
+  if(b==4) return maindata.planType.Premium.monthlyPrice;
+  else return 0;
+}
 // router.get("/getProfile",async(req,res)=>{
 //   try{
 //     const foundProfile=await Profile.findOne({_id:data.user});
@@ -27,7 +39,7 @@ const CLIENT_URL=config.get('CLIENT_URL');
 //     }
 //     else{
 //       return res.status(300).json({"msg":"no profile exists"});
-//     }
+//     }rs
 //   }
 //   catch(error){
 //   }
@@ -35,22 +47,33 @@ const CLIENT_URL=config.get('CLIENT_URL');
 
 router.get('/success',async(req,res)=>{
       try{
-        console.log("request recidees")
+        console.log("request recidees");
+        console.log(data);
       const foundProfile=await Profile.findOne({user:data.user});
             if(foundProfile){
-              foundProfile.Action=data.Active;
-              foundProfile.monthlyPrice=data.monthlyPrice;
-              foundProfile.planType=data.planType;
-              foundProfile.price=data.price;
-              foundProfile.startDate=data.startDate;
-              await foundProfile.save();
+              // console.log("foundprofile is");
+              // console.log(foundProfile);
+              // foundProfile.Action=data.Active;
+              // foundProfile.monthlyType=data.monthlyType;
+              // foundProfile.planType=data.planType;
+              // foundProfile.price=data.price;
+              // foundProfile.startDate=data.startDate;
+                            // const result=await Profile.deleteOne({user:data.user});
+                            // if(result>0){
+                            //   console.log("delete successfull")
+                            // }
+              // await foundProfile.save();
+              const updatedprofile = await Profile.findByIdAndUpdate(foundProfile._id, data, { new: true });
             }
             else{
-               const profile=new Profile(data);
+              const profile=new Profile(data);
               await  profile.save();
             }
-            res.send("saved successfully");
+            
+               
             console.log("saved successfully")
+            return res.send("saved successfully");
+            
       }
       catch(error){
           console.log(error);
@@ -59,27 +82,29 @@ router.get('/success',async(req,res)=>{
 router.post('/create-checkout-session', auth, async (req, res) => {
   try {
     const { mt, pt } = req.body.items;
-    console.log(req.user.id);
-    console.log(pt)
+    console.log(mt)
     const plans = await Plan.find();
-    console.log(plans[0].planType.Premium.monthlyPrice)
     data.user=req.user.id;
-    data.monthlyType=mt==1?"monthly":"yearly";
-    planType=pt;
-    const sri=mt==0?1:0;
+    data.planType=pt;
+    data.Active=true;
+    data.monthlyType=mt==0?"monthly":"yearly";
+    console.log(getprice(plans,mt,pt)) ;
     const val=["basic","Mobile","standard","premium"];
-    data.price=plans[sri].planType.Basic.monthlyPrice;
-    data.startDate=Date.now();
+    data.price=getprice(plans,mt,pt);
+    const dt=formatDate();
+    console.log("dt"+dt);
+    data.startDate=dt;
+    console.log("logging data");
     console.log(data);
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           price_data: {
-            currency: 'usd',
+            currency: 'inr',
             product_data: {
-              name: (mt ? "Monthly Subscription" : "Yearly Subscription")+(val[pt-1]) ,
+              name: (mt ? "Monthly Subscription " : "Yearly Subscription ")+(val[pt-1]) ,
             },
-            unit_amount:plans[sri].planType.Basic.monthlyPrice,
+            unit_amount:getprice(plans,mt,pt)*100,
           },
           quantity: 1,
         },

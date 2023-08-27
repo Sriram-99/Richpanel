@@ -27,7 +27,7 @@ const Navbar = ({auth:{isAuthenticated,loading},logout}) => {
   return (
     <nav className="navbar bg-dark">
       <h1>
-        <NavLink to ="/"><i className="fas fa-code"></i> Paykaro</NavLink>
+        <NavLink to ="/"><i className="fas fa-code"></i> SubsFlow</NavLink>
       </h1>
       {!loading &&(<>{isAuthenticated?authLinks:guestLinks}</>) }
     </nav>

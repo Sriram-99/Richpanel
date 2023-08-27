@@ -7,22 +7,30 @@ const PlanSchema=new Schema({
     planType:{
         Mobile:{
             monthlyPrice:Number,
-            Resolution:String,
+            resolution:String,
+            video:String,
+            screens:Number,
             Devices:[String]
         },
         Basic:{
             monthlyPrice:Number,
             Resolution:String,
+            video:String,
+            screens:Number,
             Devices:[String]
         },
         Standard:{
             monthlyPrice:Number,
             Resolution:String,
+            video:String,
+            screens:Number,
             Devices:[String]
         },
         Premium:{
             monthlyPrice:Number,
             Resolution:String,
+            video:String,
+            screens:Number,
             Devices:[String]
         },
     },
