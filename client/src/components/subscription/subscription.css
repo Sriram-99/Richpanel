@@ -1,0 +1,123 @@
+/* Subscription.css */
+.subscription-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .subscription-table th,
+  .subscription-table td {
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #ccc; /* Horizontal lines */
+    border-bottom: 1px solid #ccc; /* Horizontal lines */
+  }
+  
+  .subscription-table th:first-child,
+  .subscription-table td:first-child {
+    text-align: left;
+    border-left: none; /* Remove left border for the first column */
+  }
+  
+  .subscription-table th:last-child,
+  .subscription-table td:last-child {
+    border-right: none; /* Remove right border for the last column */
+  }
+  
+  .subscription-table th {
+    background-color: #f5faff; /* Light blue background for header cells */
+  }
+  
+  .subscription-table th:hover {
+    background-color: #e5f0ff; /* Lighter blue on hover */
+    cursor: pointer;
+  }
+  
+  .subscription-button {
+    background-color: #0056b3; /* Blue button */
+    color: #fff;
+    border: none;
+    padding: 17px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-right: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subscription-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .subscription-button.active {
+    background-color: #0056b3; /* Darker blue for active button */
+  }
+  
+  .subscription-period {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .subscription-table td,
+    .subscription-table th {
+      font-size: 14px;
+    }
+  
+    .subscription-button {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  
+    .subscription-period {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+  
+  .main-subscription-button{
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    padding: 17px 20px ;
+    cursor: pointer;
+    font-size: 14px;
+    border: 5px solid #007bff;
+    transition: background-color 0.3s ease;
+  }
+  .btn-one{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+  }
+  .btn-two{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+  }
+  .next-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .next-button {
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .next-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  
+  
+  
+  
+  
